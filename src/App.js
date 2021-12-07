@@ -1,24 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import Movie from './components/Movie';
+import MovieForm from './components/MovieForm';
+import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 function App() {
+<Router></Router>
+  const [movies, setMovies] = useState(
+    [
+     
+    ]
+  );
+
+  const removeMovie = (id) =>{
+    setMovies(movies.filter(movie=>{
+      return movie.id!==id;
+    }))
+  }
+
+  const renderMovies = movies.length ? movies.map(movie=>{
+    return(
+      <Movie 
+      movie={movie} 
+      key={movie.id}
+      removeMovie={removeMovie}
+      />
+    )
+  }) : '추가된 영화가 없습니다';
+
+  const addMovie = (movie) =>{
+    setMovies([
+      ...movies,
+      movie
+    ]);
+  }
+
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar/>
+      <Switch>
+        <Route path="/movies">
+          <h1>Movie list</h1>
+          <MovieForm addMovie={addMovie}/>
+          {renderMovies}
+        </Route>
+        <Route path="/users">
+          <h1>Users</h1>
+        </Route>
+        <Route path="/" exact>
+          <h1>Home</h1>
+        </Route>
+      </Switch>
     </div>
+    </Router>
   );
 }
 
