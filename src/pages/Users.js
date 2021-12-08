@@ -13,7 +13,7 @@ const Users = () =>{
             setLoading(false)
         });
     },[]);
-   
+
 
     return(
         <>
