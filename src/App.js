@@ -3,6 +3,7 @@ import Movie from './components/Movie';
 import MovieForm from './components/MovieForm';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Users from './pages/Users';
 
 function App() {
 <Router></Router>
@@ -46,7 +47,7 @@ function App() {
           {renderMovies}
         </Route>
         <Route path="/users">
-          <h1>Users</h1>
+          <Users/>
         </Route>
         <Route path="/" exact>
           <h1>Home</h1>
